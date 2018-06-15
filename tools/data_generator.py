@@ -3,10 +3,6 @@ import cv2
 import random
 from PIL import Image
 import os.path
-from tensorflow.python.platform import gfile
-from joblib import Parallel, delayed
-import multiprocessing as mp
-import time
 """
 This code is highly influenced by the implementation of:
 https://github.com/joelthchao/tensorflow-finetune-flickr-style/dataset.py
@@ -18,9 +14,9 @@ class ImageDataGenerator:
                  scale_size=(64, 64), classes=5, mode='train'):
 
         # Init params
-        self.root_folder = '/ssd/wangzw/CACD_cropped_400/'
+        self.root_folder = '/new_disk2/wangzw/tangxu/CACD_cropped_400/'
         if mode == 'train':
-            self.file_folder = '/ssd/wangzw/age_data/train_data/'
+            self.file_folder = '/new_disk2/wangzw/tangxu/age_data/train_data/'
             self.class_lists = ['train_age_group_0.txt',
                                'train_age_group_1.txt',
                                'train_age_group_2.txt',
@@ -28,21 +24,16 @@ class ImageDataGenerator:
                                'train_age_group_4.txt']
             self.pointer = [0, 0, 0, 0, 0]
         else:
-            self.file_folder = '/ssd/wangzw/age_data/test_data/'
+            self.file_folder = '/new_disk2/wangzw/tangxu/age_data/test_data/'
             self.class_lists = ['test_age_group_0.txt',
                                'test_age_group_1.txt',
                                'test_age_group_2.txt',
                                'test_age_group_3.txt',
-                               'test_age_group_4.txt',
-                               'test.txt']
+                               'test_age_group_4.txt']
             self.pointer = [0, 0, 0, 0, 0, 0]
 
-        self.train_label_pair = '/home/tangxu/wangzw/tensorflow/tools/train_label_pair.txt'
-        # self.generate_folder = '/home/wangzw/generated/'
-        # self.test_folder = '/home/wangzw/test'
-        # self.true_folder = '/home/wangzw/true'
-        # self.test_data_dir = '/home/wangzw/casia_cropped_400'
-        # self.test_generated='/home/wangzw/test_generated/'
+        self.train_label_pair = '/home/wangzw/Face-Aging-with-Identity-Preserved-Conditional-Generative-Adversarial-Networks-master/tools' \
+                                '/train_label_pair.txt'
         self.true_labels = []
         self.false_labels = []
         self.images = []
@@ -317,12 +308,12 @@ class ImageDataGenerator:
 
         return imgs, self.one_hot_labels[index], paths
 
-    def load_test_imgs(self, test_data_dir, img_size=128):
-        paths = os.listdir(test_data_dir)
+    def load_imgs(self, data_dir, img_size=128):
+        paths = os.listdir(data_dir)
         # Read images
         imgs = np.ndarray([len(paths), img_size, img_size, 3])
         for i in range(len(paths)):
-            img = cv2.imread(os.path.join(test_data_dir, paths[i]))
+            img = cv2.imread(os.path.join(data_dir, paths[i]))
             img = img[:, :, [2, 1, 0]]
             # rescale image
             img = cv2.resize(img, (img_size, img_size))
@@ -523,14 +514,14 @@ def next_source_imgs(self):
             imgs.append(img)
     return imgs
 
-if __name__ == '__main__':
-    generator = ImageDataGenerator(32, 128, 128, 256, shuffle=True,
-                     scale_size=(227, 227), classes=5, mode='train')
-    time1 = time.time()
-    generator.next_batch()
-    print(time.time() - time1)
-
-    time1 = time.time()
-    # for i in range(10):
-    generator.mp_next_batch()
-    print(time.time() - time1)
+# if __name__ == '__main__':
+#     generator = ImageDataGenerator(32, 128, 128, 256, shuffle=True,
+#                      scale_size=(227, 227), classes=5, mode='train')
+#     time1 = time.time()
+#     generator.next_batch()
+#     print(time.time() - time1)
+#
+#     time1 = time.time()
+#     # for i in range(10):
+#     generator.mp_next_batch()
+#     print(time.time() - time1)

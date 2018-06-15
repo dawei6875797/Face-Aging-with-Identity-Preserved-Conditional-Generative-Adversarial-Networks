@@ -3,5 +3,3 @@ scipy==1.0.0
 opencv-python==3.3.0.10
 numpy==1.11.0
 Pillow==5.1.0
-joblib==0.11
-ops==0.4.7

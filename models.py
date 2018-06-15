@@ -3,8 +3,9 @@ import numpy as np
 import os.path
 import random
 from tensorflow.python.training import moving_averages
-from tools.ops import *
-
+import sys
+sys.path.append('./tools/')
+from ops import *
 
 class FaceAging(object):
     def __init__(self, sess, lr, keep_prob, model_num, batch_size=64, decay_steps=None,

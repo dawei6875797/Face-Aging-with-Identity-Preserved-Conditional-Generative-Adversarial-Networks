@@ -5,10 +5,12 @@ os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 import numpy as np
 import tensorflow as tf
 from datetime import datetime
-from source_input import load_source_batch3
 from models import FaceAging
-from tools.utils import save_images, save_source
-from tools.data_generator import ImageDataGenerator
+import sys
+sys.path.append('./tools/')
+from source_input import load_source_batch3
+from utils import save_images, save_source
+from data_generator import ImageDataGenerator
 
 flags = tf.app.flags
 flags.DEFINE_float("learning_rate", 0.001, "Learning rate")
@@ -25,10 +27,10 @@ flags.DEFINE_integer("age_groups", 5, "the number of different age groups")
 
 flags.DEFINE_integer('max_steps', 200000, 'Number of batches to run')
 
-flags.DEFINE_string("alexnet_pretrained_model", "/ssd/wangzw/tensorflow_models/tensorflow_alexnet/alexnet.model-292000",
+flags.DEFINE_string("alexnet_pretrained_model", "pre_trained/alexnet.model-292000",
                     "Directory name to save the checkpoints")
 
-flags.DEFINE_string("age_pretrained_model", "/ssd/wangzw/tensorflow_models/tensorflow_alexnet/age_classifier.model-300000",
+flags.DEFINE_string("age_pretrained_model", "pre_trained/age_classifier.model-300000",
                     "Directory name to save the checkpoints")
 
 flags.DEFINE_integer('model_index', None, 'the index of trained model')
@@ -49,9 +51,9 @@ flags.DEFINE_string("sample_dir", None, "Directory name to save the sample image
 
 flags.DEFINE_string("fea_layer_name", None, "which layer to use for fea_loss")
 
-flags.DEFINE_string("source_file", '/ssd/wangzw/age_data/train_label_data/train_age_group_0.txt', "source file path")
+flags.DEFINE_string("source_file", 'your training file', "source file path")
 
-flags.DEFINE_string("root_folder", '/ssd/wangzw/CACD_cropped_400/', "folder that contains images")
+flags.DEFINE_string("root_folder", 'CACD_cropped_400/', "folder that contains images")
 
 FLAGS = flags.FLAGS
 
@@ -99,7 +101,6 @@ def my_train():
         g_error = model.g_loss/model.gan_loss_weight
         fea_error = model.fea_loss/model.fea_loss_weight
         age_error = model.age_loss/model.age_loss_weight
-        # age_error = model.age_loss
 
         # Start running operations on the Graph.
         sess.run(tf.global_variables_initializer())
@@ -108,7 +109,7 @@ def my_train():
         model.alexnet_saver.restore(sess, FLAGS.alexnet_pretrained_model)
         model.age_saver.restore(sess, FLAGS.age_pretrained_model)
 
-        if model.load(FLAGS.source_checkpoint_dir, model.saver, 'acgan', '99999'):
+        if model.load(FLAGS.checkpoint_dir, model.saver):
             print(" [*] Load SUCCESS")
         else:
             print(" [!] Load failed...")

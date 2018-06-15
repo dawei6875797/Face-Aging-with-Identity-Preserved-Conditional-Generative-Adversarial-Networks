@@ -6,6 +6,7 @@ import pprint
 import scipy.misc
 import numpy as np
 from time import gmtime, strftime
+import cv2
 
 def get_image(image_path, image_size, is_crop=True, resize_w=64, is_grayscale = False):
     return transform(imread(image_path, is_grayscale), image_size, is_crop, resize_w)
