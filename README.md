@@ -25,7 +25,7 @@ Cudnn 6.0
 We use the Cross-Age Celebrity Dataset for training and Evaluation. More details about this dataset, please refer to (http://bcsiriuschen.github.io/CARC/). After face detection, aligning and center cropping, we split 
 images into 5 age groups: 11-20, 21-30, 31-40, 41-50 and 50+.
 
-## 3. Testing on saved models
+## 3. Test on saved models
 Download the trained face aging model(https://1drv.ms/u/s!AlUWwwOcwDWobCqmuFyKGIt4qaA) and place models files in checkpoints/0_conv5_lsgan_transfer_g75_0.5f-4_a30. 
 * Test images are in images/test, and some training images that belong to 11-20 age group are in images/train.
 ```
@@ -33,8 +33,7 @@ Download the trained face aging model(https://1drv.ms/u/s!AlUWwwOcwDWobCqmuFyKGI
     python test.py
 ```
 
-
-## 4. Training from scratch
+## 4. Train from scratch
 * Firstly, download the pre-trained alexnet model(https://1drv.ms/u/s!AlUWwwOcwDWobkptownyu5fjlfU) and age classfication model(https://1drv.ms/f/s!AlUWwwOcwDWocX-Z0IJft_VbcoQ). Then unzip these files and place model files in checkpoints/pre_trained.
 ```shell
 python age_lsgan_transfer.py \
@@ -54,8 +53,6 @@ sh age_lsgan_transfer.py
 * The aging effect of different methods![scalars_method_comparison](images/method_comp.JPG).
 * The aging effect of different age classification loss weights![scalars_age_loss_weight](images/age_effect.JPG).
 * The aging effect of different feature layer![scalars_layer](images/layer.JPG).
-
-
 
 ## Citation
 If you find this useful, please cite our work as follows:
