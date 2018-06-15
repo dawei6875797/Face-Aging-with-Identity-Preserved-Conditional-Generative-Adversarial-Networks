@@ -7,10 +7,8 @@ import tensorflow as tf
 from datetime import datetime
 from source_input import load_source_batch3
 from models import AlexNet
-import sys
-sys.path.append('/home/tangxu/wangzw/tensorflow/tools/')
-from utils_rgb import save_images, save_source
-from acgan_rgbdata import ImageDataGenerator
+from tools.utils import save_images, save_source
+from tools.data_generator import ImageDataGenerator
 
 flags = tf.app.flags
 flags.DEFINE_float("learning_rate", 0.001, "Learning rate")
