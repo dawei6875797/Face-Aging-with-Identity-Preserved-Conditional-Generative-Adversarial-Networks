@@ -3,9 +3,7 @@ import numpy as np
 import os.path
 import random
 from tensorflow.python.training import moving_averages
-import sys
-sys.path.append('/home/tangxu/wangzw/tensorflow/tools/')
-from ops import *
+from tools.ops import *
 
 
 class FaceAging(object):
@@ -169,39 +167,6 @@ class FaceAging(object):
             x = conv2d(x, 512, 4, 4, d_h=1, d_w=1, name='dis_4')
 
             print(x.get_shape())
-
-            return x
-
-    def casia_discriminator(self, image, name='discriminator', condition=None, reuse=False, mode='train'):
-        with tf.variable_scope(name):
-            if reuse:
-                tf.get_variable_scope().reuse_variables()
-
-            x = lrelu(conv2d(image, 32, 3, 3, 1, 1, name='dis_11'))
-            x = lrelu(self.batch_norm('dis_bn1', conv2d(x, 64, 3, 3, 1, 1, name='dis_12'),   mode))
-
-            x = lrelu(self.batch_norm('dis_bn21', conv2d(x, 64, 3, 3, 2, 2, name='dis_21'),  mode))
-            if condition is not None:
-                x = tf.concat([x, condition], axis=3)
-
-            x = lrelu(self.batch_norm('dis_bn22', conv2d(x, 64, 3, 3, 1, 1,  name='dis_22'), mode))
-            x = lrelu(self.batch_norm('dis_bn23', conv2d(x, 128, 3, 3, 1, 1, name='dis_23'), mode))
-
-            x = lrelu(self.batch_norm('dis_bn31', conv2d(x, 128, 3, 3, 2, 2, name='dis_31'), mode))
-            x = lrelu(self.batch_norm('dis_bn32', conv2d(x, 96, 3, 3, 1, 1,  name='dis_32'), mode))
-            x = lrelu(self.batch_norm('dis_bn33', conv2d(x, 192, 3, 3, 1, 1, name='dis_33'), mode))
-
-            x = lrelu(self.batch_norm('dis_bn41', conv2d(x, 192, 3, 3, 2, 2, name='dis_41'), mode))
-            x = lrelu(self.batch_norm('dis_bn42', conv2d(x, 128, 3, 3, 1, 1, name='dis_42'), mode))
-            x = lrelu(self.batch_norm('dis_bn43', conv2d(x, 256, 3, 3, 1, 1, name='dis_43'), mode))
-
-            x = lrelu(self.batch_norm('dis_bn51', conv2d(x, 256, 3, 3, 2, 2, name='dis_51'), mode))
-            x = lrelu(self.batch_norm('dis_bn52', conv2d(x, 160, 3, 3, 1, 1, name='dis_52'), mode))
-            x = lrelu(self.batch_norm('dis_bn53', conv2d(x, 320, 3, 3, 1, 1, name='dis_53'), mode))
-
-            x = tf.nn.avg_pool(x, ksize=[1, 8, 8, 1], strides=[1, 1, 1, 1], padding='SAME')
-
-            x = linear(tf.reshape(x, [image.get_shape().as_list()[0], -1]), 1, name='dis_0')
 
             return x
 
