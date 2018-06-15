@@ -50,9 +50,9 @@ sh age_lsgan_transfer.py
 * You can change the hyperparameters to adapt to your own dataset.
 
 ## 5. Experiment results
-* The aging effect of different methods![scalars_method_comparison](images/method_comp.JPG).
-* The aging effect of different age classification loss weights![scalars_age_loss_weight](images/age_effect.JPG).
-* The aging effect of different feature layer![scalars_layer](images/layer.JPG).
+* The aging effect of different methods.![scalars_method_comparison](images/method_comp.JPG)
+* The aging effect of different age classification loss weights.![scalars_age_loss_weight](images/age_effect.JPG)
+* The aging effect of different feature layer.![scalars_layer](images/layer.JPG)
 
 ## Citation
 If you find this useful, please cite our work as follows:
