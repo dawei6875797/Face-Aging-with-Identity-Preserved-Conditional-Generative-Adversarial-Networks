@@ -8,7 +8,7 @@ sys.path.append('/home/tangxu/wangzw/tensorflow/tools/')
 from ops import *
 
 
-class AlexNet(object):
+class FaceAging(object):
     def __init__(self, sess, lr, keep_prob, model_num, batch_size=64, decay_steps=None,
                  gan_loss_weight=None, fea_loss_weight=None, age_loss_weight=None,
                  tv_loss_weight=None):
