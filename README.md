@@ -27,7 +27,7 @@ images into 5 age groups: 11-20, 21-30, 31-40, 41-50 and 50+.
 
 ## 3. Testing on saved models
 Download the trained face aging model(https://1drv.ms/u/s!AlUWwwOcwDWobCqmuFyKGIt4qaA) and place models files in checkpoints/0_conv5_lsgan_transfer_g75_0.5f-4_a30. 
-* Test images are in images/test, and some train images that belong to 11-20 age group are in images/train.
+* Test images are in images/test, and some training images that belong to 11-20 age group are in images/train.
 ```
 * Running the sript to get aged faces
     python test.py
