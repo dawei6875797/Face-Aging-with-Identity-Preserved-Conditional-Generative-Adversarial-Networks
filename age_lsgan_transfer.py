@@ -6,7 +6,7 @@ import numpy as np
 import tensorflow as tf
 from datetime import datetime
 from source_input import load_source_batch3
-from models import AlexNet
+from models import FaceAging
 from tools.utils import save_images, save_source
 from tools.data_generator import ImageDataGenerator
 
@@ -73,7 +73,7 @@ train_generator = ImageDataGenerator(batch_size=FLAGS.batch_size, height=FLAGS.f
 def my_train():
     with tf.Graph().as_default():
         sess = tf.Session(config=config)
-        model = AlexNet(sess=sess, lr=FLAGS.learning_rate, keep_prob=1., model_num=FLAGS.model_index, batch_size=FLAGS.batch_size,
+        model = FaceAging(sess=sess, lr=FLAGS.learning_rate, keep_prob=1., model_num=FLAGS.model_index, batch_size=FLAGS.batch_size,
                         age_loss_weight=FLAGS.age_loss_weight, gan_loss_weight=FLAGS.gan_loss_weight,
                         fea_loss_weight=FLAGS.fea_loss_weight, tv_loss_weight=FLAGS.tv_loss_weight)
 
