@@ -10,11 +10,6 @@ import time
 """
 This code is highly influenced by the implementation of:
 https://github.com/joelthchao/tensorflow-finetune-flickr-style/dataset.py
-But changed abit to allow dataaugmentation (yet only horizontal flip) and
-shuffling of the data.
-The other source of inspiration is the ImageDataGenerator by @fchollet in the
-Keras library. But as I needed BGR color format for fine-tuneing AlexNet I
-wrote my own little generator.
 """
 
 
