@@ -30,7 +30,7 @@ images into 5 age groups: 11-20, 21-30, 31-40, 41-50 and 50+.
 * Firstly, download the pre-trained alexnet model(https://1drv.ms/u/s!AlUWwwOcwDWobkptownyu5fjlfU) and age classfication model(https://1drv.ms/f/s!AlUWwwOcwDWocX-Z0IJft_VbcoQ). unzip these files and place model files in checkpoints/pre_trained folder.
  Then download the trained face aging model(https://1drv.ms/u/s!AlUWwwOcwDWobCqmuFyKGIt4qaA) and place models files in checkpoints/0_conv5_lsgan_transfer_g75_0.5f-4_a30 folder
  checkpoints.zip. 
-* test images is in images/original
+* Test images is in images/original
 ```
 * Running the sript to get aged faces
     python test.py
@@ -50,12 +50,12 @@ python age_lsgan_transfer.py \
 ``` shell
 sh age_lsgan_transfer.py
 ```
-* you can change the hyperparameters to adapt to your own dataset.
+* You can change the hyperparameters to adapt to your own dataset.
 
 ## 5. Experiment results
-*The aging effect of different methods![scalars_method_comparison](images/method_comp.JPG).
-*The aging effect of different age classification loss weights![scalars_age_loss_weight](images/age_effect.JPG).
-*The aging effect of different feature layer![scalars_layer](images/layer.JPG).
+* The aging effect of different methods![scalars_method_comparison](images/method_comp.JPG).
+* The aging effect of different age classification loss weights![scalars_age_loss_weight](images/age_effect.JPG).
+* The aging effect of different feature layer![scalars_layer](images/layer.JPG).
 
 
 
