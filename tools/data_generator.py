@@ -405,6 +405,24 @@ class ImageDataGenerator:
 
         return imgs, self.one_hot_labels[index], self.label_features_64[index], \
                self.label_features_64[error_label], self.age_label[index]
+    
+    def next_target_batch_transfer2(self):
+        index = self.true_labels[self.label_pair_index]
+        paths = self.images[index][self.pointer[index]:self.pointer[index] + self.batch_size]
+        # Read images
+        imgs = np.ndarray([self.batch_size, self.scale_size[0], self.scale_size[1], 3])
+        for i in range(len(paths)):
+            imgs[i] = process_target_img(self.root_folder, paths[i], self.scale_size[0])
+        # update pointer
+        self.pointer[index] += self.batch_size
+        if self.pointer[index] >= (self.data_size[index] - self.batch_size):
+            self.reset_pointer(index)
+
+        error_label = self.false_labels[self.label_pair_index]
+        self.label_pair_index += 1
+
+        return imgs, self.label_features_128[index], self.label_features_64[index], \
+               self.label_features_64[error_label], self.age_label[index]
 
     def next(self):
         index = self.true_labels[self.label_pair_index]
